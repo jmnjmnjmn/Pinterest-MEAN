@@ -3,10 +3,10 @@
 var request = require('request');
 var cheerio = require('cheerio');
 
-exports.list = function(url, callback) {
+exports.list = function(url, cb) {
   request(url, function(error, resp, body) {
     if(error) {
-      callback({
+      cb({
         error: error
       });
     }
@@ -26,7 +26,7 @@ exports.list = function(url, callback) {
       }
 
       // respond with the final JSON object
-      callback(pin);
+      cb(pin);
     }
   });
 }
