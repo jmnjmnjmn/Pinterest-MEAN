@@ -46,6 +46,15 @@
         myModal.$promise.then(myModal.show);
       }
 
+      looksAPI.getAllLooks()
+        .then(function(data) {
+          console.log(data);
+          $scope.looks = data.data;
+        })
+        .catch(function(err) {
+          console.log('failed to get loks' + err);
+        });
+
       // Watch for changes to URL, Scrape and Display Results
       $scope.$watch('look.link', function(newVal, oldVal) {
           if (newVal.length > 5) {
