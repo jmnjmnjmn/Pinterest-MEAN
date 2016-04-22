@@ -21,6 +21,11 @@
     $scope.uploadLookTitle = true;
     $scope.uploadLookForm = false;
 
+    $scope.busy = true;
+    $scope.allData = [];
+    var page = 0;
+    var step = 3;
+
     var alertSuccess = $alert({
       title: 'Success! ',
       content: 'New Look added',
@@ -52,11 +57,28 @@
       .then(function(data) {
         console.log('looks found ');
         console.log(data);
-        $scope.looks = data.data;
+        // $scope.looks = data.data;
+        $scope.allData = data.data;
+        $scope.nextPage();
+        $scope.busy = false;
       })
       .catch(function(err) {
         console.log('failed to get looks ' + err);
       });
+
+      $scope.nextPage = function() {
+        var lookLength = $scope.looks.length;
+        if($scope.busy) {
+          return;
+        }
+        $scope.busy = true;
+        $scope.looks = $scope.looks.concat($scope.allData.splice(page * step, step));
+        page++;
+        $scope.busy = false;
+        if($scope.looks.length === 0) {
+          $scope.noMoreData = true;
+        }
+      };
 
       $scope.showUploadForm = function() {
         $scope.uploadLookForm = true;
@@ -92,6 +114,18 @@
           });
       }
     });
+
+    $scope.addVote = function(look) {
+
+      looksAPI.upVoteLook(look)
+        .then(function(data) {
+          console.log(data);
+          look.upVotes++;
+        })
+        .catch(function(err) {
+          console.log('failed adding upvote ');
+        });
+    }
 
     $scope.addScrapePost = function() {
       var look = {

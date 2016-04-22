@@ -16,6 +16,7 @@ module.exports = function(app) {
 
   app.use('/api/look', require('./api/look'));
   app.use('/api/links', require('./api/imgScraper'));
+  app.use('/api/comments', require('./api/comments'));
 
   app.post('/forgotpassword', require('./forgotpassword').reset);
 
