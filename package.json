@@ -4,7 +4,9 @@
 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./server/app.js"
+    "start": "node ./server/app.js",
+    "postinstall": "bower install"
+
   },
   "engines": {
     "node": "4.2.2"
