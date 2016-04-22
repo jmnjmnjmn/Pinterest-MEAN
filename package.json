@@ -6,6 +6,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js"
   },
+  "engines": {
+    "node": "4.2.2"
+  },
   "dependencies": {
     "body-parser": "^1.13.3",
     "cheerio": "^0.19.0",
@@ -38,8 +41,6 @@
     "requirejs": "^2.1.18",
     "serve-favicon": "^2.3.0"
   },
-  "engines": {
-    "node": "4.2.2"
-  },
+
   "private": true
 }
